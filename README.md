@@ -1,5 +1,12 @@
 # Vertical Federated Learning (VFL) Simulation
 
+| MCI-VFL series | Repository | Scope |
+|:--|:--|:--|
+| Phase 1/4 | [mci-vfl-p1-bi-platform](https://github.com/Sinalkz/mci-vfl-p1-bi-platform) | Blockchain-based VFL platform for business intelligence |
+| **Phase 2/4** | **[mci-vfl-p2-loan-simulation](https://github.com/Sinalkz/mci-vfl-p2-loan-simulation)** | **VFL loan-eligibility simulation (telecom + bank)** |
+| Phase 3/4 | [mci-vfl-p3-fabric-chaincode](https://github.com/Sinalkz/mci-vfl-p3-fabric-chaincode) | Hyperledger Fabric audit chaincode |
+| Phase 4/4 | [mci-vfl-p4-credit-platform](https://github.com/Sinalkz/mci-vfl-p4-credit-platform) | Blockchain-coordinated VFL credit platform |
+
 This repository contains a proof-of-concept simulation of **Vertical Federated Learning (VFL)** for training a machine learning model across two organizations without sharing raw data.
 
 ## Overview
