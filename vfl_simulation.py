@@ -1,3 +1,4 @@
+import hashlib
 import numpy as np
 import pandas as pd
 
@@ -228,12 +229,17 @@ def main_training_loop(epochs=20):
         blockchain.log_event("EPOCH_COMPLETE", {"job_id": job_id, "epoch": i+1, "loss": f"{loss:.6f}"})
 
     # --- Training end ---
-    final_model_hash = f"W_a: {hash(guest.weights.tobytes())} | W_b: {hash(host.weights.tobytes())}"
+    final_model_hash = (f"W_a: {hashlib.sha256(guest.weights.tobytes()).hexdigest()} | "
+                        f"W_b: {hashlib.sha256(host.weights.tobytes()).hexdigest()}")
     blockchain.log_event("TRAINING_END", {"job_id": job_id, "final_loss": f"{loss:.6f}", "model_hash": final_model_hash})
     
     # Display final results
     print("\n--- Training Finished ---")
     print(f"Final Loss: {loss:.4f}")
+    # Accuracy on the training users (there is no held-out set), next to always predicting the majority class
+    y_pred = (sigmoid(guest.X.dot(guest.weights) + host.X.dot(host.weights)) > 0.5).astype(int)
+    majority = max(host.y.mean(), 1 - host.y.mean())
+    print(f"Training accuracy: {(y_pred == host.y).mean():.1%} (always predicting the majority class: {majority:.1%})")
     blockchain.print_ledger()
 
 if __name__ == "__main__":
